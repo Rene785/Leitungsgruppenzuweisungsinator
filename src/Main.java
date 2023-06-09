@@ -16,6 +16,9 @@ public class Main {
         new Main();
     }
 
+    /**
+     * Initializing all groups, their size, creating people and assigning groups to them.
+     */
     public Main(){
         personList = new LinkedList<>();
         groups = new LinkedList<>();
@@ -31,8 +34,11 @@ public class Main {
         roverSize = 0;
         createPeople();
         calculatePeople(personList);
-
     }
+
+    /**
+     * Creates people and sets their veto groups.
+     */
     private void createPeople() {
         Person carl = new Person("Carl",19,new ArrayList<>());
         carl.getVetos().add(Group.WÖLFLINGE);
@@ -43,6 +49,10 @@ public class Main {
         personList.add(jasper);
     }
 
+    /**
+     * For every person the method picks a random person left in the list and assigns a group to them based on the size of the other groups.
+     * @param personList The list containing every person
+     */
     private void calculatePeople(LinkedList<Person> personList) {
         while(!personList.isEmpty()){
             int random = (int) (Math.random() * personList.size());
@@ -58,6 +68,10 @@ public class Main {
         }
     }
 
+    /**
+     * Calculates the smallest group. If more than one group have the same size it picks randomly.
+     * @return The smallest group.
+     */
     private Group getMinGroup() {
         if (biberSize == woSize && woSize == juffiSize && juffiSize == pfadiSize && pfadiSize == roverSize) {
             int random = (int) (Math.random() * 5);
@@ -100,6 +114,10 @@ public class Main {
         }
     }
 
+    /**
+     * Increments the size of a Group. Used after a person got assigned to a group.
+     * @param group
+     */
     private void incrementGroupSize(Group group){
         switch (group){
             case BIBER -> biberSize++;
@@ -109,6 +127,12 @@ public class Main {
             case ROVER -> roverSize++;
         }
     }
+
+    /**
+     * Returns the group size for a specific group.
+     * @param group The group where the size is wanted.
+     * @return The size of the group
+     */
     private int getGroupSize(Group group){
         switch (group){
             case BIBER -> {
